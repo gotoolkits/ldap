@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/vanackere/asn1-ber"
 )
@@ -269,7 +270,7 @@ func DebugBinaryFile(fileName string) error {
 	if err != nil {
 		return NewError(ErrorDebugging, err)
 	}
-	ber.PrintBytes(file, "")
+	ber.PrintBytes(os.Stdout, file, "")
 	packet := ber.DecodePacket(file)
 	addLDAPDescriptions(packet)
 	ber.PrintPacket(packet)
