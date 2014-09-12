@@ -145,7 +145,7 @@ func (l *Conn) StartTLS(config *tls.Config) error {
 		ber.PrintPacket(packet)
 	}
 
-	if packet.Children[1].Children[0].Value.(uint64) == 0 {
+	if packet.Children[1].Children[0].Value.(int64) == 0 {
 		conn := tls.Client(l.conn, config)
 		l.isTLS = true
 		l.conn = conn
