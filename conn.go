@@ -122,7 +122,7 @@ func (l *Conn) StartTLS(config *tls.Config) error {
 	}
 
 	packet := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "LDAP Request")
-	packet.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagInteger, messageID, "MessageID"))
+	packet.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagInteger, int64(messageID), "MessageID"))
 	request := ber.Encode(ber.ClassApplication, ber.TypeConstructed, ApplicationExtendedRequest, nil, "Start TLS")
 	request.AppendChild(ber.NewString(ber.ClassContext, ber.TypePrimitive, 0, "1.3.6.1.4.1.1466.20037", "TLS Extended Command"))
 	packet.AppendChild(request)
@@ -170,7 +170,7 @@ func (l *Conn) sendMessage(packet *ber.Packet) (chan *ber.Packet, error) {
 	out := make(chan *ber.Packet)
 	message := &messagePacket{
 		Op:        MessageRequest,
-		MessageID: packet.Children[0].Value.(uint64),
+		MessageID: uint64(packet.Children[0].Value.(int64)),
 		Packet:    packet,
 		Channel:   out,
 	}
@@ -270,7 +270,7 @@ func (l *Conn) reader() {
 		addLDAPDescriptions(packet)
 		message := &messagePacket{
 			Op:        MessageResponse,
-			MessageID: packet.Children[0].Value.(uint64),
+			MessageID: uint64(packet.Children[0].Value.(int64)),
 			Packet:    packet,
 		}
 		if !l.sendProcessMessage(message) {

@@ -83,19 +83,19 @@ func (m ModifyRequest) encode() *ber.Packet {
 	changes := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "Changes")
 	for _, attribute := range m.addAttributes {
 		change := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "Change")
-		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, uint64(AddAttribute), "Operation"))
+		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, int64(AddAttribute), "Operation"))
 		change.AppendChild(attribute.encode())
 		changes.AppendChild(change)
 	}
 	for _, attribute := range m.deleteAttributes {
 		change := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "Change")
-		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, uint64(DeleteAttribute), "Operation"))
+		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, int64(DeleteAttribute), "Operation"))
 		change.AppendChild(attribute.encode())
 		changes.AppendChild(change)
 	}
 	for _, attribute := range m.replaceAttributes {
 		change := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "Change")
-		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, uint64(ReplaceAttribute), "Operation"))
+		change.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagEnumerated, int64(ReplaceAttribute), "Operation"))
 		change.AppendChild(attribute.encode())
 		changes.AppendChild(change)
 	}
@@ -114,7 +114,7 @@ func NewModifyRequest(
 func (l *Conn) Modify(modifyRequest *ModifyRequest) error {
 	messageID := l.nextMessageID()
 	packet := ber.Encode(ber.ClassUniversal, ber.TypeConstructed, ber.TagSequence, nil, "LDAP Request")
-	packet.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagInteger, messageID, "MessageID"))
+	packet.AppendChild(ber.NewInteger(ber.ClassUniversal, ber.TypePrimitive, ber.TagInteger, int64(messageID), "MessageID"))
 	packet.AppendChild(modifyRequest.encode())
 
 	l.Debug.PrintPacket(packet)
