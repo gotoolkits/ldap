@@ -12,19 +12,19 @@ import (
 )
 
 const (
-	FilterAnd             = 0
-	FilterOr              = 1
-	FilterNot             = 2
-	FilterEqualityMatch   = 3
-	FilterSubstrings      = 4
-	FilterGreaterOrEqual  = 5
-	FilterLessOrEqual     = 6
-	FilterPresent         = 7
-	FilterApproxMatch     = 8
-	FilterExtensibleMatch = 9
+	FilterAnd             ber.Tag = 0
+	FilterOr              ber.Tag = 1
+	FilterNot             ber.Tag = 2
+	FilterEqualityMatch   ber.Tag = 3
+	FilterSubstrings      ber.Tag = 4
+	FilterGreaterOrEqual  ber.Tag = 5
+	FilterLessOrEqual     ber.Tag = 6
+	FilterPresent         ber.Tag = 7
+	FilterApproxMatch     ber.Tag = 8
+	FilterExtensibleMatch ber.Tag = 9
 )
 
-var filterMap = map[uint8]string{
+var filterMap = map[ber.Tag]string{
 	FilterAnd:             "And",
 	FilterOr:              "Or",
 	FilterNot:             "Not",

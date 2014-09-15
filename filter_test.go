@@ -9,7 +9,7 @@ import (
 
 type compileTest struct {
 	filterStr  string
-	filterType uint8
+	filterType ber.Tag
 }
 
 var testFilters = []compileTest{
@@ -33,7 +33,7 @@ func TestFilter(t *testing.T) {
 		filter, err := CompileFilter(i.filterStr)
 		if err != nil {
 			t.Errorf("Problem compiling %s - %s", i.filterStr, err.Error())
-		} else if filter.Tag != uint8(i.filterType) {
+		} else if filter.Tag != i.filterType {
 			t.Errorf("%q Expected %q got %q", i.filterStr, filterMap[i.filterType], filterMap[filter.Tag])
 		} else {
 			o, err := DecompileFilter(filter)

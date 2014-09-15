@@ -15,29 +15,29 @@ import (
 
 // LDAP Application Codes
 const (
-	ApplicationBindRequest           = 0
-	ApplicationBindResponse          = 1
-	ApplicationUnbindRequest         = 2
-	ApplicationSearchRequest         = 3
-	ApplicationSearchResultEntry     = 4
-	ApplicationSearchResultDone      = 5
-	ApplicationModifyRequest         = 6
-	ApplicationModifyResponse        = 7
-	ApplicationAddRequest            = 8
-	ApplicationAddResponse           = 9
-	ApplicationDelRequest            = 10
-	ApplicationDelResponse           = 11
-	ApplicationModifyDNRequest       = 12
-	ApplicationModifyDNResponse      = 13
-	ApplicationCompareRequest        = 14
-	ApplicationCompareResponse       = 15
-	ApplicationAbandonRequest        = 16
-	ApplicationSearchResultReference = 19
-	ApplicationExtendedRequest       = 23
-	ApplicationExtendedResponse      = 24
+	ApplicationBindRequest           ber.Tag = 0
+	ApplicationBindResponse          ber.Tag = 1
+	ApplicationUnbindRequest         ber.Tag = 2
+	ApplicationSearchRequest         ber.Tag = 3
+	ApplicationSearchResultEntry     ber.Tag = 4
+	ApplicationSearchResultDone      ber.Tag = 5
+	ApplicationModifyRequest         ber.Tag = 6
+	ApplicationModifyResponse        ber.Tag = 7
+	ApplicationAddRequest            ber.Tag = 8
+	ApplicationAddResponse           ber.Tag = 9
+	ApplicationDelRequest            ber.Tag = 10
+	ApplicationDelResponse           ber.Tag = 11
+	ApplicationModifyDNRequest       ber.Tag = 12
+	ApplicationModifyDNResponse      ber.Tag = 13
+	ApplicationCompareRequest        ber.Tag = 14
+	ApplicationCompareResponse       ber.Tag = 15
+	ApplicationAbandonRequest        ber.Tag = 16
+	ApplicationSearchResultReference ber.Tag = 19
+	ApplicationExtendedRequest       ber.Tag = 23
+	ApplicationExtendedResponse      ber.Tag = 24
 )
 
-var ApplicationMap = map[uint8]string{
+var ApplicationMap = map[ber.Tag]string{
 	ApplicationBindRequest:           "Bind Request",
 	ApplicationBindResponse:          "Bind Response",
 	ApplicationUnbindRequest:         "Unbind Request",
